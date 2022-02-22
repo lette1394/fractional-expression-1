@@ -13,6 +13,12 @@ object Fits {
         }
 
         val diff = baseHeight - targetHeight
-        return List(diff) { " ".repeat(targetWidth) }.plus(target).joinToString(lineSeparator())
+        val count = diff / 2
+        if (diff % 2 == 0) {
+            return List(count) { " ".repeat(targetWidth) }.plus(target).plus(List(count) { " ".repeat(targetWidth) })
+                .joinToString(lineSeparator())
+        }
+        return List(count + 1) { " ".repeat(targetWidth) }.plus(target).plus(List(count) { " ".repeat(targetWidth) })
+            .joinToString(lineSeparator())
     }
 }
