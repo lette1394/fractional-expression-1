@@ -11,192 +11,192 @@ class FitsTest : FreeSpec({
     "width" - {
         "1x1" {
             val target = """
-                x
-            """.trimIndent()
+                |x
+            """.trimMargin()
 
             val base = """
-                y
-            """.trimIndent()
+                |y
+            """.trimMargin()
 
             val expected = """
-                x
-            """.trimIndent()
+                |x
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "2x2" {
             val target = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             val base = """
-                yy
-            """.trimIndent()
+                |yy
+            """.trimMargin()
 
             val expected = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "3x3" {
             val target = """
-                xxx
-            """.trimIndent()
+                |xxx
+            """.trimMargin()
 
             val base = """
-                yyy
-            """.trimIndent()
+                |yyy
+            """.trimMargin()
 
             val expected = """
-                xxx
-            """.trimIndent()
+                |xxx
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "2x1" {
             val target = """
-                x
-            """.trimIndent()
+                |x
+            """.trimMargin()
 
             val base = """
-                yy
-            """.trimIndent()
+                |yy
+            """.trimMargin()
 
             val expected = """
-                 x
-            """.trimIndent()
+                | x
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "2x1 reverse" {
             val target = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             val base = """
-                y
-            """.trimIndent()
+                |y
+            """.trimMargin()
 
             val expected = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "3x1" {
             val target = """
-                x
-            """.trimIndent()
+                |x
+            """.trimMargin()
 
             val base = """
-                yyy
-            """.trimIndent()
+                |yyy
+            """.trimMargin()
 
             val expected = """
-                 x 
-            """.trimIndent()
+                | x 
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "4x1" {
             val target = """
-                x
-            """.trimIndent()
+                |x
+            """.trimMargin()
 
             val base = """
-                yyyy
-            """.trimIndent()
+                |yyyy
+            """.trimMargin()
 
             val expected = """
-                  x 
-            """.trimIndent()
+                |  x 
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "4x2" {
             val target = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             val base = """
-                yyyy
-            """.trimIndent()
+                |yyyy
+            """.trimMargin()
 
             val expected = """
-                 xx 
-            """.trimIndent()
+                | xx 
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "4x3" {
             val target = """
-                xxx
-            """.trimIndent()
+                |xxx
+            """.trimMargin()
 
             val base = """
-                yyyy
-            """.trimIndent()
+                |yyyy
+            """.trimMargin()
 
             val expected = """
-                 xxx
-            """.trimIndent()
+                | xxx
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "4x4" {
             val target = """
-                xxxx
-            """.trimIndent()
+                |xxxx
+            """.trimMargin()
 
             val base = """
-                yyyy
-            """.trimIndent()
+                |yyyy
+            """.trimMargin()
 
             val expected = """
-                xxxx
-            """.trimIndent()
+                |xxxx
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "5x2" {
             val target = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             val base = """
-                yyyyy
-            """.trimIndent()
+                |yyyyy
+            """.trimMargin()
 
             val expected = """
-                  xx 
-            """.trimIndent()
+                |  xx 
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "6x2" {
             val target = """
-                xx
-            """.trimIndent()
+                |xx
+            """.trimMargin()
 
             val base = """
-                yyyyyy
-            """.trimIndent()
+                |yyyyyy
+            """.trimMargin()
 
             val expected = """
-                  xx  
-            """.trimIndent()
+                |  xx  
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
@@ -204,32 +204,32 @@ class FitsTest : FreeSpec({
 
         "6x3" {
             val target = """
-                xxx
-            """.trimIndent()
+                |xxx
+            """.trimMargin()
 
             val base = """
-                yyyyyy
-            """.trimIndent()
+                |yyyyyy
+            """.trimMargin()
 
             val expected = """
-                  xxx 
-            """.trimIndent()
+                |  xxx 
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
 
         "6x4" {
             val target = """
-                xxxx
-            """.trimIndent()
+                |xxxx
+            """.trimMargin()
 
             val base = """
-                yyyyyy
-            """.trimIndent()
+                |yyyyyy
+            """.trimMargin()
 
             val expected = """
-                 xxxx 
-            """.trimIndent()
+                | xxxx 
+            """.trimMargin()
 
             target fit base shouldBe expected
         }
