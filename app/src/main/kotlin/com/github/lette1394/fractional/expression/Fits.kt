@@ -4,23 +4,29 @@ import java.lang.System.lineSeparator
 
 object Fits {
     infix fun String.fit(base: String): String {
-        val targetHeight = this.split("\n").count()
-        val baseHeight = base.split("\n").count()
-        val targetWidth = this.split(lineSeparator()).maxOfOrNull { it.length } ?: this.length
-
-        if (targetHeight >= baseHeight) {
+        if (this.height() >= base.height()) {
             return this
         }
 
-        val diff = baseHeight - targetHeight
-        val count = diff / 2
-        if (diff % 2 == 0) {
-            return listOf(height(count), this, height(count)).filter { it.isNotEmpty() }.joinToString(lineSeparator())
-        }
-        return listOf(height(count + 1), this, height(count)).filter { it.isNotEmpty() }.joinToString(lineSeparator())
+        val diff = base.height() - this.height()
+        return listOf(topPadding(diff), this, bottomPadding(diff))
+            .filter { it.isNotEmpty() }
+            .joinToString(lineSeparator())
     }
+
+    private fun String.height() = this.split("\n").count()
+
+    private fun String.width() = this.split(lineSeparator()).maxOfOrNull { it.length } ?: this.length
+
+    private fun topPadding(diff: Int) = if (diff % 2 == 0) {
+        padding(diff / 2)
+    } else {
+        padding((diff / 2) + 1)
+    }
+
+    private fun bottomPadding(diff: Int) = padding(diff / 2)
 
     private fun spaces(size: Int = 1) = " ".repeat(size)
 
-    private fun height(size: Int = 1) = List(size) { spaces(size) }.joinToString(lineSeparator())
+    private fun padding(size: Int = 1) = List(size) { spaces(size) }.joinToString(lineSeparator())
 }
