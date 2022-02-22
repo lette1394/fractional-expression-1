@@ -5,7 +5,15 @@ import io.kotest.matchers.shouldBe
 
 class FractionTest : FreeSpec({
 
-    "wow" {
+    "1/2" {
+        Fraction("1/2").asString() shouldBe """
+            | 1 
+            |---
+            | 2 
+        """.trimMargin()
+    }
+
+    "1 + 1/2" {
         Fraction("1 + 1/2").asString() shouldBe """
             |     1 
             |1 + ---
