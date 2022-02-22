@@ -20,4 +20,12 @@ class FractionTest : FreeSpec({
             | 23 
         """.trimMargin()
     }
+
+    "11/235" {
+        Fraction("11/235").asString() shouldBe """
+            |  11 
+            |-----
+            | 235 
+        """.trimMargin()
+    }
 })
