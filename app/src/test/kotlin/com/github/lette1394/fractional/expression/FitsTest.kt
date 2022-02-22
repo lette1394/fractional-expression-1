@@ -41,5 +41,23 @@ class FitsTest : FreeSpec({
 
             Fits.width(target, base) shouldBe expected
         }
+
+        "1x2 reverse" {
+            val target = """
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+            """.trimIndent()
+
+            val expected = """
+                x
+                x
+            """.trimIndent()
+
+            Fits.width(target, base) shouldBe expected
+        }
     }
 })
