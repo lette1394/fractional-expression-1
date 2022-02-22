@@ -33,6 +33,47 @@ class FitsTest : FreeSpec({
         target fit base shouldBe expected
     }
 
+    "1x9" {
+        val target = """
+                |x
+            """.trimMargin()
+
+        val base = """
+                |yyy
+                |yyy
+                |yyy
+            """.trimMargin()
+
+        val expected = """
+                |   
+                | x 
+                |   
+            """.trimMargin()
+
+        target fit base shouldBe expected
+    }
+
+    "4x9" {
+        val target = """
+                |xx
+                |xx
+            """.trimMargin()
+
+        val base = """
+                |yyy
+                |yyy
+                |yyy
+            """.trimMargin()
+
+        val expected = """
+                |   
+                | xx
+                | xx
+            """.trimMargin()
+
+        target fit base shouldBe expected
+    }
+
     "width" - {
         "1x1" {
             val target = """
