@@ -4,25 +4,27 @@ import java.lang.System.lineSeparator
 
 object Fits {
     infix fun String.fit(base: String): String {
-        return fitHeight(fitWidth(this, base), base)
+        return fitWidth(base).fitHeight(base)
     }
 
-    private fun String.fitWidth(target: String, base: String): String {
-        if (target.width() >= base.width()) {
-            return target
+    private infix fun String.fitWidth(base: String): String {
+        if (this.width() >= base.width()) {
+            return this
         }
 
-        val diff = base.width() - target.width()
-        return leftPadding(diff) + target + rightPadding(diff)
+        val diff = base.width() - this.width()
+        return this.split(lineSeparator())
+            .map { leftPadding(diff) + it + rightPadding(diff) }
+            .joinToString(lineSeparator())
     }
 
-    private fun String.fitHeight(target: String, base: String): String {
-        if (target.height() >= base.height()) {
-            return target
+    private infix fun String.fitHeight(base: String): String {
+        if (this.height() >= base.height()) {
+            return this
         }
 
-        val diff = base.height() - target.height()
-        return listOf(topPadding(diff), target, bottomPadding(diff))
+        val diff = base.height() - this.height()
+        return listOf(topPadding(diff), this, bottomPadding(diff))
             .filter { it.isNotEmpty() }
             .joinToString(lineSeparator())
     }
@@ -47,7 +49,7 @@ object Fits {
 
     private fun String.rightPadding(diff: Int) = spaces(diff / 2)
 
-    private fun String.linePadding(size: Int = 1) = List(size) { spaces(width()) }.joinToString(lineSeparator())
+    private fun String.linePadding(height: Int) = List(height) { spaces(width()) }.joinToString(lineSeparator())
 
     private fun spaces(size: Int = 1) = " ".repeat(size)
 }

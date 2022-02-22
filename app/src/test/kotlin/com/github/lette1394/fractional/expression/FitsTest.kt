@@ -8,6 +8,31 @@ import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
 class FitsTest : FreeSpec({
+    "5x4" {
+        val target = """
+                |xxx
+                |xxx
+            """.trimMargin()
+
+        val base = """
+                |yyyy
+                |yyyy
+                |yyyy
+                |yyyy
+                |yyyy
+            """.trimMargin()
+
+        val expected = """
+                |    
+                |    
+                | xxx
+                | xxx
+                |    
+            """.trimMargin()
+
+        target fit base shouldBe expected
+    }
+
     "width" - {
         "1x1" {
             val target = """
