@@ -3,6 +3,7 @@
  */
 package com.github.lette1394.fractional.expression
 
+import com.github.lette1394.fractional.expression.Fits.fit
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -21,7 +22,7 @@ class FitsTest : FreeSpec({
                 x
             """.trimIndent()
 
-            Fits.width(target, base) shouldBe expected
+            target fit base shouldBe expected
         }
 
         "1x2" {
@@ -39,7 +40,7 @@ class FitsTest : FreeSpec({
                 x
             """.trimIndent()
 
-            Fits.width(target, base) shouldBe expected
+            target fit base shouldBe expected
         }
 
         "1x2 reverse" {
@@ -57,7 +58,7 @@ class FitsTest : FreeSpec({
                 x
             """.trimIndent()
 
-            Fits.width(target, base) shouldBe expected
+            target fit base shouldBe expected
         }
 
         "2x2" {
@@ -76,7 +77,7 @@ class FitsTest : FreeSpec({
                 x
             """.trimIndent()
 
-            Fits.width(target, base) shouldBe expected
+            target fit base shouldBe expected
         }
 
         "1x3" {
@@ -96,7 +97,7 @@ class FitsTest : FreeSpec({
                  
             """.trimIndent()
 
-            Fits.width(target, base) shouldBe expected
+            target fit base shouldBe expected
         }
     }
 })
