@@ -29,6 +29,15 @@ object Fits {
             .joinToString(lineSeparator())
     }
 
+    infix fun String.thenDown(down: String): String {
+        val fitThis = this.fitWidth(down)
+        val fitDown = down.fitWidth(this)
+
+        return listOf(fitThis, fitDown)
+            .filter { it.isNotEmpty() }
+            .joinToString(lineSeparator())
+    }
+
     private fun String.height() = this.split("\n").count()
 
     private fun String.width() = this.split(lineSeparator()).maxOfOrNull { it.length } ?: this.length
