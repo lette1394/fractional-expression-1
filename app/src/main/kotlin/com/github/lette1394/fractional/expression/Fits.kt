@@ -7,7 +7,7 @@ object Fits {
         return fitWidth(base).fitHeight(base)
     }
 
-    private infix fun String.fitWidth(base: String): String {
+    infix fun String.fitWidth(base: String): String {
         if (this.width() >= base.width()) {
             return this
         }
@@ -18,7 +18,7 @@ object Fits {
             .joinToString(lineSeparator())
     }
 
-    private infix fun String.fitHeight(base: String): String {
+    infix fun String.fitHeight(base: String): String {
         if (this.height() >= base.height()) {
             return this
         }
