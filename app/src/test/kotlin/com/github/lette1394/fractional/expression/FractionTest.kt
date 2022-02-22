@@ -13,11 +13,11 @@ class FractionTest : FreeSpec({
         """.trimMargin()
     }
 
-    "1 + 1/2" {
-        Fraction("1 + 1/2").asString() shouldBe """
-            |     1 
-            |1 + ---
-            |     2 
+    "11/23" {
+        Fraction("11/23").asString() shouldBe """
+            | 11 
+            |----
+            | 23 
         """.trimMargin()
     }
 })
