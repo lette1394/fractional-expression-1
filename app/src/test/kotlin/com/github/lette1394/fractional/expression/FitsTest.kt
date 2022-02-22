@@ -25,6 +25,275 @@ class FitsTest : FreeSpec({
             target fit base shouldBe expected
         }
 
+        "2x2" {
+            val target = """
+                xx
+            """.trimIndent()
+
+            val base = """
+                yy
+            """.trimIndent()
+
+            val expected = """
+                xx
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "3x3" {
+            val target = """
+                xxx
+            """.trimIndent()
+
+            val base = """
+                yyy
+            """.trimIndent()
+
+            val expected = """
+                xxx
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x1" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                yy
+            """.trimIndent()
+
+            val expected = """
+                 x
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x1 reverse" {
+            val target = """
+                xx
+            """.trimIndent()
+
+            val base = """
+                y
+            """.trimIndent()
+
+            val expected = """
+                xx
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "3x1" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                yyy
+            """.trimIndent()
+
+            val expected = """
+                 x 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "4x1" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                yyyy
+            """.trimIndent()
+
+            val expected = """
+                  x 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "4x2" {
+            val target = """
+                xx
+            """.trimIndent()
+
+            val base = """
+                yyyy
+            """.trimIndent()
+
+            val expected = """
+                 xx 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "4x3" {
+            val target = """
+                xxx
+            """.trimIndent()
+
+            val base = """
+                yyyy
+            """.trimIndent()
+
+            val expected = """
+                 xxx
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "4x4" {
+            val target = """
+                xxxx
+            """.trimIndent()
+
+            val base = """
+                yyyy
+            """.trimIndent()
+
+            val expected = """
+                xxxx
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "5x2" {
+            val target = """
+                xx
+            """.trimIndent()
+
+            val base = """
+                yyyyy
+            """.trimIndent()
+
+            val expected = """
+                  xx 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "6x2" {
+            val target = """
+                xx
+            """.trimIndent()
+
+            val base = """
+                yyyyyy
+            """.trimIndent()
+
+            val expected = """
+                  xx  
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+
+        "6x3" {
+            val target = """
+                xxx
+            """.trimIndent()
+
+            val base = """
+                yyyyyy
+            """.trimIndent()
+
+            val expected = """
+                  xxx 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "6x4" {
+            val target = """
+                xxxx
+            """.trimIndent()
+
+            val base = """
+                yyyyyy
+            """.trimIndent()
+
+            val expected = """
+                 xxxx 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+    }
+
+    "height" - {
+
+        "1x1" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+            """.trimIndent()
+
+            val expected = """
+                x
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x2" {
+            val target = """
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                x
+                x
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "3x3" {
+            val target = """
+                x
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                x
+                x
+                x
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
         "1x2" {
             val target = """
                 x
@@ -61,24 +330,6 @@ class FitsTest : FreeSpec({
             target fit base shouldBe expected
         }
 
-        "2x2" {
-            val target = """
-                x
-                x
-            """.trimIndent()
-
-            val base = """
-                y
-                y
-            """.trimIndent()
-
-            val expected = """
-                x
-                x
-            """.trimIndent()
-
-            target fit base shouldBe expected
-        }
 
         "1x3" {
             val target = """
@@ -95,6 +346,283 @@ class FitsTest : FreeSpec({
                  
                 x
                  
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "1x4" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                 
+                x
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "1x5" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                 
+                x
+                 
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x3" {
+            val target = """
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                x
+                x
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "3x3" {
+            val target = """
+                x
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                x
+                x
+                x
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x4" {
+            val target = """
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                x
+                x
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x5" {
+            val target = """
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                 
+                x
+                x
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "2x6" {
+            val target = """
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                 
+                x
+                x
+                 
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "4x6" {
+            val target = """
+                x
+                x
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                x
+                x
+                x
+                x
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "1x6" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                 
+                 
+                x
+                 
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "1x7" {
+            val target = """
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                 
+                 
+                x
+                 
+                 
+                 
+            """.trimIndent()
+
+            target fit base shouldBe expected
+        }
+
+        "5x6" {
+            val target = """
+                x
+                x
+                x
+                x
+                x
+            """.trimIndent()
+
+            val base = """
+                y
+                y
+                y
+                y
+                y
+                y
+            """.trimIndent()
+
+            val expected = """
+                 
+                x
+                x
+                x
+                x
+                x
             """.trimIndent()
 
             target fit base shouldBe expected
