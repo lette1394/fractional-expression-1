@@ -3,12 +3,11 @@
  */
 package com.github.lette1394.fractional.expression
 
-import kotlin.test.Test
-import kotlin.test.assertNotNull
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-class AppTest {
-    @Test fun appHasAGreeting() {
-        val classUnderTest = App()
-        assertNotNull(classUnderTest.greeting, "app should have a greeting")
+class AppTest : StringSpec({
+    "strings.length should return size of string" {
+        "hello".length shouldBe 5
     }
-}
+})
