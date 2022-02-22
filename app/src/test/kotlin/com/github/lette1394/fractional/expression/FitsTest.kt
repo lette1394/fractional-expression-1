@@ -3,23 +3,25 @@
  */
 package com.github.lette1394.fractional.expression
 
-import io.kotest.core.spec.style.StringSpec
+import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-class FitsTest : StringSpec({
-    "1x1" {
-        val base = """
-            y
-        """.trimIndent()
+class FitsTest : FreeSpec({
+    "width" - {
+        "1x1" {
+            val target = """
+                x
+            """.trimIndent()
 
-        val target = """
-            x
-        """.trimIndent()
+            val base = """
+                y
+            """.trimIndent()
 
-        val expected = """
-            x
-        """.trimIndent()
+            val expected = """
+                x
+            """.trimIndent()
 
-        Fits.width(target, base) shouldBe expected
+            Fits.width(target, base) shouldBe expected
+        }
     }
 })
