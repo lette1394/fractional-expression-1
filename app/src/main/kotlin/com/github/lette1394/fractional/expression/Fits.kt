@@ -38,6 +38,14 @@ object Fits {
             .joinToString(lineSeparator())
     }
 
+    infix fun String.thenRight(down: String): String {
+        val fitThis = this.fitHeight(down)
+        val fitRight = down.fitHeight(this)
+
+        return fitThis.split(lineSeparator()).zip(fitRight.split(lineSeparator()))
+            .joinToString(lineSeparator()) { (first, second) -> first + second }
+    }
+
     private fun String.height() = this.split("\n").count()
 
     private fun String.width() = this.split(lineSeparator()).maxOfOrNull { it.length } ?: this.length
