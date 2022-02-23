@@ -27,4 +27,16 @@ class ExpressionTest : FreeSpec({
             | 2     3     4 
         """.trimMargin()
     }
+
+    "1/2 / 1/3" {
+        Expression("1/2 / 1/3").asString() shouldBe """
+            |  1  
+            | --- 
+            |  2  
+            |-----
+            |  1  
+            | --- 
+            |  3  
+        """.trimMargin()
+    }
 })
