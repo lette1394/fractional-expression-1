@@ -46,9 +46,9 @@ object Fits {
             .joinToString(lineSeparator()) { (first, second) -> first + second }
     }
 
-    private fun String.height() = this.split("\n").count()
+    fun String.height() = this.split("\n").count()
 
-    private fun String.width() = this.split(lineSeparator()).maxOfOrNull { it.length } ?: this.length
+    fun String.width() = this.split(lineSeparator()).maxOfOrNull { it.length } ?: this.length
 
     private fun String.topPadding(diff: Int) = if (diff % 2 == 0) {
         linePadding(diff / 2)
