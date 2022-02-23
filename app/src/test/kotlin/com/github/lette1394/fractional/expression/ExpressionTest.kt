@@ -39,4 +39,10 @@ class ExpressionTest : FreeSpec({
             |  3  
         """.trimMargin()
     }
+
+    "1 + (2 - 3)" {
+        Expression("1 + (2 - 3)").asString() shouldBe """
+            |1 + (2 - 3)
+        """.trimMargin()
+    }
 })
