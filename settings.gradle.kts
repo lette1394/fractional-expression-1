@@ -8,4 +8,5 @@
  */
 
 rootProject.name = "tdd-practice"
-include("large-number")
+include("fraction")
+include("password-validator")
