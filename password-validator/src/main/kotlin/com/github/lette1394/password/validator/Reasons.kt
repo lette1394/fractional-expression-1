@@ -11,6 +11,7 @@ class Reasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
         PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS,
         PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS,
         PASSWORD_MUST_CONTAIN_AT_LEAST_ONE_CAPITAL_LETTER,
+        PASSWORD_MUST_CONTAIN_AT_LEAST_ONE_SPECIAL_CHARACTER,
     }
 
     override fun equals(other: Any?): Boolean {
