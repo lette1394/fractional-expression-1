@@ -10,4 +10,19 @@ class Reasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
     enum class Reason {
         PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Reasons
+
+        if (reasons != other.reasons) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return reasons.hashCode()
+    }
 }

@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 
 class PasswordTest : FreeSpec({
     "Password must be at least 8 characters - 1" {
-        Password.create("12345678") shouldBe Right("12345678")
+        Password.create("12345678") shouldBe Right(Password("12345678"))
     }
 
     "Password must be at least 8 characters - 2" {

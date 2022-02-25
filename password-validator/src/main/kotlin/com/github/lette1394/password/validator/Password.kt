@@ -1,17 +1,47 @@
 package com.github.lette1394.password.validator
 
 import arrow.core.Either
+import arrow.core.Either.Left
 import arrow.core.Either.Right
-import com.github.lette1394.password.validator.Contracts.Companion.requires
+import com.github.lette1394.password.validator.Reasons.Reason
+import com.github.lette1394.password.validator.Reasons.Reason.PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS
 
-class Password private constructor(private val value: String) {
+class Password(private val value: String) {
     companion object {
+        private fun gogo(contracts: () -> Boolean, ifViolatedThen: () -> Unit) {
+            if (contracts()) {
+                return
+            }
+            ifViolatedThen()
+        }
+
         fun create(value: String): Either<Reasons, Password> {
-            return Right(Password("12"))
+            val reasons = mutableSetOf<Reason>()
+            gogo({ value.length >= 8 }, { reasons.add(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS) })
+
+            if (reasons.isEmpty()) {
+                return Right(Password(value))
+            }
+            return Left(Reasons(reasons))
         }
     }
 
     init {
-        requires({ value.isNotBlank() }, { IllegalArgumentException("") })
+        gogo({ value.length >= 8 }, { throw IllegalArgumentException("") })
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Password
+
+        if (value != other.value) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
     }
 }
