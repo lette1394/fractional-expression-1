@@ -3,19 +3,8 @@ package com.github.lette1394.password.validator
 import arrow.core.Either
 
 class Password private constructor(private val value: String) {
-    companion object {
-        val policy = AllPasswordPolicy(
-            PasswordMustBeAtLeast8Characters(),
-            PasswordMustContainAtLeast2Numbers(),
-            PasswordMustContainAtLeastOneCapitalLetter(),
-        )
 
-        fun create(value: String): Either<Reasons, Password> {
-            return policy.matches(value).map { Password(value) }
-        }
-    }
-
-    fun asString() = toString()
+    fun asString() = value
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -33,10 +22,10 @@ class Password private constructor(private val value: String) {
     }
 
     override fun toString(): String {
-        return value
+        return "Password(value='$value')"
     }
 
     class Factory(private val passwordPolicy: PasswordPolicy) {
-        fun create(value: String) = passwordPolicy.matches(value).map { Password(value) }
+        fun create(value: String): Either<Reasons, Password> = passwordPolicy.matches(value).map { Password(value) }
     }
 }

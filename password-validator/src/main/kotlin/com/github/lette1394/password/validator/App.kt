@@ -3,13 +3,17 @@
  */
 package com.github.lette1394.password.validator
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
+import arrow.core.getOrHandle
 
 fun main() {
-    println(App().greeting)
+    val passwordPolicy = AllPasswordPolicy(
+        PasswordMustBeAtLeast8Characters(),
+        PasswordMustContainAtLeast2Numbers(),
+        PasswordMustContainAtLeastOneCapitalLetter(),
+    )
+    val factory = Password.Factory(passwordPolicy)
+    val password = factory.create("Hello-World-1234")
+        .getOrHandle { throw IllegalArgumentException(it.joinToString()) }
+
+    println(password)
 }
