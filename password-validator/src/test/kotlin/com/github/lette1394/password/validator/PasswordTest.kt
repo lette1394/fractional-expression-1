@@ -5,7 +5,7 @@ import arrow.core.Either.Right
 import com.github.lette1394.password.validator.Reasons.Companion.reasons
 import com.github.lette1394.password.validator.Reasons.Reason.PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS
 import com.github.lette1394.password.validator.Reasons.Reason.PASSWORD_MUST_CONTAIN_AT_LEAST_ONE_CAPITAL_LETTER
-import com.github.lette1394.password.validator.Reasons.Reason.THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS
+import com.github.lette1394.password.validator.Reasons.Reason.PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
@@ -22,7 +22,7 @@ class PasswordTest : FreeSpec({
         Password.create("") shouldBe Left(
             reasons(
                 PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS,
-                THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS,
+                PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS,
                 PASSWORD_MUST_CONTAIN_AT_LEAST_ONE_CAPITAL_LETTER,
             )
         )
@@ -33,7 +33,7 @@ class PasswordTest : FreeSpec({
     }
 
     "The password must contain at least 2 numbers - 2" {
-        Password.create("abcdEfgh") shouldBe Left(reasons(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
+        Password.create("abcdEfgh") shouldBe Left(reasons(PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
     }
 
     "password must contain at least one capital letter - 1" {

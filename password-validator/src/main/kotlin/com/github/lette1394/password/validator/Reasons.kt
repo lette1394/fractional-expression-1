@@ -9,7 +9,7 @@ class Reasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
 
     enum class Reason {
         PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS,
-        THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS,
+        PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS,
         PASSWORD_MUST_CONTAIN_AT_LEAST_ONE_CAPITAL_LETTER,
     }
 
