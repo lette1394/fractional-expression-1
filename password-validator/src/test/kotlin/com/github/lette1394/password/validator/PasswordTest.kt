@@ -13,10 +13,10 @@ class PasswordTest : FreeSpec({
     }
 
     "Password must be at least 8 characters - 2" {
-        Password("1234567") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
+        Password.create("1234567") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
     }
 
     "Password must be at least 8 characters - 3" {
-        Password("") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
+        Password.create("") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
     }
 })
