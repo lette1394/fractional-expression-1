@@ -6,12 +6,14 @@ import arrow.core.Either.Right
 import com.github.lette1394.password.validator.Contracts.Companion.requiresRun
 import com.github.lette1394.password.validator.Reasons.Reason
 import com.github.lette1394.password.validator.Reasons.Reason.PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS
+import com.github.lette1394.password.validator.Reasons.Reason.THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS
 
 class Password(private val value: String) {
     companion object {
         fun create(value: String): Either<Reasons, Password> {
             val reasons = mutableSetOf<Reason>()
-            requiresRun(function(value)) { reasons.add(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS) }
+            requiresRun(function1(value)) { reasons.add(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS) }
+            requiresRun(function2(value)) { reasons.add(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS) }
 
             if (reasons.isEmpty()) {
                 return Right(Password(value))
@@ -19,11 +21,14 @@ class Password(private val value: String) {
             return Left(Reasons(reasons))
         }
 
-        private fun function(value: String): () -> Boolean = { value.length >= 8 }
+        private fun function1(value: String): () -> Boolean = { value.length >= 8 }
+        private fun function2(value: String): () -> Boolean =
+            { value.map { it.digitToIntOrNull() }.filterNotNull().size >= 2 }
     }
 
     init {
-        requiresRun(function(value)) { throw IllegalArgumentException("") }
+        requiresRun(function1(value)) { throw IllegalArgumentException(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS.name) }
+        requiresRun(function2(value)) { throw IllegalArgumentException(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS.name) }
     }
 
     override fun equals(other: Any?): Boolean {

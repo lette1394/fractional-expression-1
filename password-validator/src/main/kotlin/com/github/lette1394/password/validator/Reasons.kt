@@ -26,4 +26,8 @@ class Reasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
     override fun hashCode(): Int {
         return reasons.hashCode()
     }
+
+    override fun toString(): String {
+        return reasons.toString()
+    }
 }

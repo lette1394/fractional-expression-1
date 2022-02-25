@@ -18,7 +18,7 @@ class PasswordTest : FreeSpec({
     }
 
     "Password must be at least 8 characters - 3" {
-        Password.create("") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
+        Password.create("") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS, THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
     }
 
     "The password must contain at least 2 numbers - 1" {
