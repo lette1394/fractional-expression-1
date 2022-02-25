@@ -26,6 +26,6 @@ class PasswordTest : FreeSpec({
     }
 
     "The password must contain at least 2 numbers - 2" {
-        Password.create("abc") shouldBe Left(reasons(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
+        Password.create("abcdefgh") shouldBe Left(reasons(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
     }
 })
