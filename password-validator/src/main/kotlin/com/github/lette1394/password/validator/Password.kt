@@ -1,9 +1,8 @@
 package com.github.lette1394.password.validator
 
 import arrow.core.Either
-import arrow.core.getOrHandle
 
-class Password(private val value: String) {
+class Password private constructor(private val value: String) {
     companion object {
         val policy = AllPasswordPolicy(
             PasswordMustBeAtLeast8Characters(),
@@ -16,9 +15,7 @@ class Password(private val value: String) {
         }
     }
 
-    init {
-        policy.matches(value).getOrHandle { throw IllegalArgumentException(it.joinToString()) }
-    }
+    fun asString() = toString()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -37,5 +34,9 @@ class Password(private val value: String) {
 
     override fun toString(): String {
         return value
+    }
+
+    class Factory(private val passwordPolicy: PasswordPolicy) {
+        fun create(value: String) = passwordPolicy.matches(value).map { Password(value) }
     }
 }
