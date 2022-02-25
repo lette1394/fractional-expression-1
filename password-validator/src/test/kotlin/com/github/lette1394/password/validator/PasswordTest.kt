@@ -11,28 +11,29 @@ import io.kotest.matchers.shouldBe
 
 class PasswordTest : FreeSpec({
     "Password must be at least 8 characters - 1" {
-        Password.create("12345678") shouldBe Right(Password("12345678"))
+        Password.create("12345678A") shouldBe Right(Password("12345678A"))
     }
 
     "Password must be at least 8 characters - 2" {
-        Password.create("1234567") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
+        Password.create("123456A") shouldBe Left(reasons(PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS))
     }
 
     "Password must be at least 8 characters - 3" {
         Password.create("") shouldBe Left(
             reasons(
                 PASSWORD_MUST_BE_AT_LEAST_8_CHARACTERS,
-                THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS
+                THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS,
+                PASSWORD_MUST_CONTAIN_AT_LEAST_ONE_CAPITAL_LETTER,
             )
         )
     }
 
     "The password must contain at least 2 numbers - 1" {
-        Password.create("abcd1234") shouldBe Right(Password("abcd1234"))
+        Password.create("abCd1234") shouldBe Right(Password("abCd1234"))
     }
 
     "The password must contain at least 2 numbers - 2" {
-        Password.create("abcdefgh") shouldBe Left(reasons(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
+        Password.create("abcdEfgh") shouldBe Left(reasons(THE_PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS))
     }
 
     "password must contain at least one capital letter - 1" {
