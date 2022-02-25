@@ -10,9 +10,10 @@ fun main() {
         PasswordMustBeAtLeast8Characters(),
         PasswordMustContainAtLeast2Numbers(),
         PasswordMustContainAtLeastOneCapitalLetter(),
+        PasswordMustContainAtLeastOneSpecialCharacter { value -> value.contains(Regex("[!@#$%^&*()\\-+]")) },
     )
     val factory = Password.Factory(passwordPolicy)
-    val password = factory.create("Hello-World-1234")
+    val password = factory.create("Hello-World-1234!")
         .getOrHandle { throw IllegalArgumentException(it.joinToString()) }
 
     println(password)
