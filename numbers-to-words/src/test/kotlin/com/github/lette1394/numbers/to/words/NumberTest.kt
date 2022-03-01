@@ -39,4 +39,22 @@ class NumberTest : FreeSpec({
             Number(number).print() shouldBe word
         }
     }
+
+    "3 digits" {
+        forAll(
+            row(100L, "백"),
+            row(101L, "백일"),
+            row(102L, "백이"),
+            row(110L, "백십"),
+            row(111L, "백십일"),
+            row(159L, "백오십구"),
+            row(200L, "이백"),
+            row(201L, "이백일"),
+            row(241L, "이백일"),
+            row(248L, "이백사십팔"),
+            row(999L, "구백구십구"),
+        ) { number, word ->
+            Number(number).print() shouldBe word
+        }
+    }
 })
