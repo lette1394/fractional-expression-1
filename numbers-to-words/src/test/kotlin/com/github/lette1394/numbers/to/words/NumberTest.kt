@@ -11,4 +11,8 @@ class NumberTest : FreeSpec({
     "1" {
         Number(1).print() shouldBe "일"
     }
+
+    "2" {
+        Number(2).print() shouldBe "이"
+    }
 })
