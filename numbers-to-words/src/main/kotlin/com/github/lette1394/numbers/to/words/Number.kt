@@ -6,6 +6,7 @@ class Number(private val value: Long) {
         return when (value) {
             0L -> "영"
             1L -> "일"
+            2L -> "이"
             else -> TODO()
         }
     }
