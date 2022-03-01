@@ -22,4 +22,21 @@ class NumberTest : FreeSpec({
             Number(number).print() shouldBe word
         }
     }
+
+    "2 digit" {
+        forAll(
+            row(10L, "십"),
+            row(11L, "십일"),
+            row(12L, "십이"),
+            row(23L, "이십삼"),
+            row(34L, "삼십사"),
+            row(44L, "사십사"),
+            row(76L, "칠십육"),
+            row(47L, "사십칠"),
+            row(88L, "팔십팔"),
+            row(99L, "구십구"),
+        ) { number, word ->
+            Number(number).print() shouldBe word
+        }
+    }
 })
