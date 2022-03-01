@@ -7,4 +7,8 @@ class NumberTest : FreeSpec({
     "0" {
         Number(0).print() shouldBe "영"
     }
+
+    "1" {
+        Number(1).print() shouldBe "일"
+    }
 })
