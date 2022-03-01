@@ -10,3 +10,4 @@
 rootProject.name = "tdd-practice"
 include("fraction")
 include("password-validator")
+include("numbers-to-words")
