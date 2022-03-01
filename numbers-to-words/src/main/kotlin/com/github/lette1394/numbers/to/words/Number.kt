@@ -1,7 +1,7 @@
 package com.github.lette1394.numbers.to.words
 
 class Number(private val value: Long) {
-    private val postfixes = listOf("", "십", "백", "천")
+    private val postfixes = listOf("", "십", "백", "천", "만")
 
     fun print(): String {
         if (value == 0L) {

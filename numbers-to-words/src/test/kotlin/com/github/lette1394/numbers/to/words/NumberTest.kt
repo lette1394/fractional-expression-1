@@ -73,4 +73,28 @@ class NumberTest : FreeSpec({
             Number(number).print() shouldBe word
         }
     }
+
+    "5 digits" {
+        forAll(
+            row(10000L, "만"),
+            row(10001L, "만일"),
+            row(10002L, "만이"),
+            row(10102L, "만백이"),
+            row(10102L, "만백이"),
+            row(40509L, "사만오백구"),
+            row(42599L, "사만이천오백구십구"),
+        ) { number, word ->
+            Number(number).print() shouldBe word
+        }
+    }
+
+    "6 digits" {
+        forAll(
+            row(100000L, "십만"),
+            row(100001L, "십만일"),
+            row(100002L, "십만이"),
+        ) { number, word ->
+            Number(number).print() shouldBe word
+        }
+    }
 })
