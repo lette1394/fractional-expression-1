@@ -57,4 +57,20 @@ class NumberTest : FreeSpec({
             Number(number).print() shouldBe word
         }
     }
+
+    "4 digits" {
+        forAll(
+            row(1000L, "천"),
+            row(1001L, "천일"),
+            row(1002L, "천이"),
+            row(1012L, "천십이"),
+            row(1202L, "천이백이"),
+            row(1590L, "천오백구십"),
+            row(7590L, "칠천오백구십"),
+            row(4382L, "사천삼백팔십이"),
+            row(9999L, "구천구백구십구"),
+        ) { number, word ->
+            Number(number).print() shouldBe word
+        }
+    }
 })
