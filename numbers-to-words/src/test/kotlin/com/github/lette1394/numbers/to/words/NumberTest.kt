@@ -50,7 +50,7 @@ class NumberTest : FreeSpec({
             row(159L, "백오십구"),
             row(200L, "이백"),
             row(201L, "이백일"),
-            row(241L, "이백일"),
+            row(241L, "이백사십일"),
             row(248L, "이백사십팔"),
             row(999L, "구백구십구"),
         ) { number, word ->
