@@ -23,7 +23,7 @@ class NumberTest : FreeSpec({
         }
     }
 
-    "2 digit" {
+    "2 digits" {
         forAll(
             row(10L, "십"),
             row(11L, "십일"),
