@@ -132,6 +132,7 @@ class NumberTest : FreeSpec({
     "9 digits" {
         forAll(
             row(100000000L, "억"),
+            row(123456789L, "억이천삼백사십오만육천칠백팔십구"),
         ) { number, word ->
             Number(number).print() shouldBe word
         }

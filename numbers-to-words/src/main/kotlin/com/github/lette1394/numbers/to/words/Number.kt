@@ -27,10 +27,10 @@ class Number(private val value: Long) {
 
     private fun postfix2(index: Int): String {
         val position = (value.toString().length - index - 1)
-        return if (position == 4) {
-            postfixes2[1]
-        } else {
-            ""
+        return when (position) {
+            4 -> postfixes2[1]
+            8 -> postfixes2[2]
+            else -> ""
         }
     }
 
