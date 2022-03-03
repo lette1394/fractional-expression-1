@@ -9,6 +9,7 @@ class Number(private val value: Long) {
             return "영"
         }
 
+        // TODO: 4개씩 나눠서 처리하면 되겠구나...
         return value.toString()
             .toCharArray()
             .map { it.digitToInt() }
