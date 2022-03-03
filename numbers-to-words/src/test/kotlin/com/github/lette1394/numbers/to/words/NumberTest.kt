@@ -93,6 +93,7 @@ class NumberTest : FreeSpec({
             row(100000L, "십만"),
             row(100001L, "십만일"),
             row(100002L, "십만이"),
+            row(448432L, "사십사만팔천사백삼십이"),
         ) { number, word ->
             Number(number).print() shouldBe word
         }
