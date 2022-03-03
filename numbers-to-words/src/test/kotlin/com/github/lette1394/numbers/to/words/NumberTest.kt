@@ -128,4 +128,12 @@ class NumberTest : FreeSpec({
             Number(number).print() shouldBe word
         }
     }
+
+    "9 digits" {
+        forAll(
+            row(100000000L, "일억"),
+        ) { number, word ->
+            Number(number).print() shouldBe word
+        }
+    }
 })
