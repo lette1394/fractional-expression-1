@@ -100,6 +100,9 @@ class NumberTest : FreeSpec({
             row(999099L, "구십구만구천구십구"),
             row(990999L, "구십구만구백구십구"),
             row(909999L, "구십만구천구백구십구"),
+            row(900999L, "구십만구백구십구"),
+            row(990099L, "구십구만구십구"),
+            row(990009L, "구십구만구"),
         ) { number, word ->
             Number(number).print() shouldBe word
         }
