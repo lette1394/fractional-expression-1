@@ -1,15 +1,12 @@
 package com.github.lette1394.password.validator
 
-class ValidPassword(private val password: String) {
+class ValidPassword(private val rule: Rule, private val password: String) {
     fun valid(): Boolean {
-        return password.length >= 8
+        return evaluation().valid
     }
 
     fun violation(): String {
-        if (valid()) {
-            return ""
-        }
-        return "Password must be at least 8 characters"
+        return evaluation().violation
     }
 
     fun stringValue(): String {
@@ -18,4 +15,6 @@ class ValidPassword(private val password: String) {
         }
         throw IllegalStateException(violation())
     }
+
+    private fun evaluation() = rule.evaluation(password)
 }

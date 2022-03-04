@@ -6,36 +6,38 @@ import io.kotest.matchers.shouldBe
 
 class ValidPasswordTest : FreeSpec({
     "Password must be at least 8 characters" - {
+        val rule = PasswordMustBeAtLeast8Characters()
+
         "input: 1234578" {
-            val subject = ValidPassword("12345678")
+            val subject = ValidPassword(rule, "12345678")
             subject.valid() shouldBe true
             subject.violation() shouldBe ""
             subject.stringValue() shouldBe "12345678"
         }
 
         "input: 123456789" {
-            val subject = ValidPassword("123456789")
+            val subject = ValidPassword(rule, "123456789")
             subject.valid() shouldBe true
             subject.violation() shouldBe ""
             subject.stringValue() shouldBe "123456789"
         }
 
         "input: 123456789abcd" {
-            val subject = ValidPassword("123456789abcd")
+            val subject = ValidPassword(rule, "123456789abcd")
             subject.valid() shouldBe true
             subject.violation() shouldBe ""
             subject.stringValue() shouldBe "123456789abcd"
         }
 
         "input: (empty)" {
-            val subject = ValidPassword("")
+            val subject = ValidPassword(rule, "")
             subject.valid() shouldBe false
             subject.violation() shouldBe "Password must be at least 8 characters"
             shouldThrow<IllegalStateException> { subject.stringValue() }
         }
 
         "input: 1234567" {
-            val subject = ValidPassword("1234567")
+            val subject = ValidPassword(rule, "1234567")
             subject.valid() shouldBe false
             subject.violation() shouldBe "Password must be at least 8 characters"
             shouldThrow<IllegalStateException> { subject.stringValue() }
@@ -43,22 +45,24 @@ class ValidPasswordTest : FreeSpec({
     }
 
     "The password must contain at least 2 numbers" - {
+        val rule = PasswordMustContainAtLeast2Numbers()
+
         "input: 12" {
-            val subject = ValidPassword("12")
+            val subject = ValidPassword(rule, "12")
             subject.valid() shouldBe true
             subject.violation() shouldBe ""
             subject.stringValue() shouldBe "12"
         }
 
         "input: abc" {
-            val subject = ValidPassword("abc")
+            val subject = ValidPassword(rule, "abc")
             subject.valid() shouldBe false
             subject.violation() shouldBe "The password must contain at least 2 numbers"
             shouldThrow<IllegalStateException> { subject.stringValue() }
         }
 
         "input: a1" {
-            val subject = ValidPassword("a1")
+            val subject = ValidPassword(rule, "a1")
             subject.valid() shouldBe false
             subject.violation() shouldBe "The password must contain at least 2 numbers"
             shouldThrow<IllegalStateException> { subject.stringValue() }
