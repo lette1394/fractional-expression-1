@@ -30,4 +30,21 @@ class ValidPasswordTest : FreeSpec({
             ValidPassword("1234567").violation() shouldBe "Password must be at least 8 characters"
         }
     }
+
+    "The password must contain at least 2 numbers" - {
+        "input: 12" {
+            ValidPassword("12").valid() shouldBe true
+            ValidPassword("12").violation() shouldBe ""
+        }
+
+        "input: abc" {
+            ValidPassword("abc").valid() shouldBe false
+            ValidPassword("abc").violation() shouldBe "The password must contain at least 2 numbers"
+        }
+
+        "input: a1" {
+            ValidPassword("a1").valid() shouldBe false
+            ValidPassword("a1").violation() shouldBe "The password must contain at least 2 numbers"
+        }
+    }
 })
