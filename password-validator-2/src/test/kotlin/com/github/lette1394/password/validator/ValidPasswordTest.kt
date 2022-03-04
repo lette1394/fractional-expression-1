@@ -3,7 +3,7 @@ package com.github.lette1394.password.validator
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 
-class PasswordTest : FreeSpec({
+class ValidPasswordTest : FreeSpec({
     "Password must be at least 8 characters: true" {
         ValidPassword("12345678").valid() shouldBe true
         ValidPassword("123456789").valid() shouldBe true
