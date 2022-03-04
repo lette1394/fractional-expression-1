@@ -17,7 +17,7 @@ class ValidPasswordTest : FreeSpec({
 
         "input: 123456789abcd" {
             ValidPassword("123456789abcd").valid() shouldBe true
-            ValidPassword("123456789abcd").violation() shouldBe "123456789abcd"
+            ValidPassword("123456789abcd").violation() shouldBe ""
         }
 
         "input: (empty)" {
