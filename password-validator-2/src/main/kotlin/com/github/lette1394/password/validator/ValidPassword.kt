@@ -11,4 +11,11 @@ class ValidPassword(private val password: String) {
         }
         return "Password must be at least 8 characters"
     }
+
+    fun stringValue(): String {
+        if (valid()) {
+            return password
+        }
+        throw IllegalStateException(violation())
+    }
 }
