@@ -3,18 +3,21 @@
  */
 package com.github.lette1394.password.validator
 
-import arrow.core.getOrHandle
+import arrow.core.computations.either
 
-fun main() {
-    val passwordPolicy = AllPasswordPolicy(
-        PasswordMustBeAtLeast8Characters(),
-        PasswordMustContainAtLeast2Numbers(),
-        PasswordMustContainAtLeastOneCapitalLetter(),
-        PasswordMustContainAtLeastOneSpecialCharacter { value -> value.contains(Regex("[!@#$%^&*()\\-+]")) },
-    )
-    val factory = Password.Factory(passwordPolicy)
-    val password = factory.create("Hello-World-1234!")
-        .getOrHandle { throw IllegalArgumentException(it.joinToString()) }
+suspend fun main() {
+    val result = either<FailedReasons, Password> {
+        val passwordPolicy = AllPasswordPolicy(
+            PasswordMustBeAtLeast8Characters(),
+            PasswordMustContainAtLeast2Numbers(),
+            PasswordMustContainAtLeastOneCapitalLetter(),
+            PasswordMustContainAtLeastOneSpecialCharacter(),
+        )
+        val factory = Password.Factory(passwordPolicy)
+        val password = factory.create("Hello-World-1234!").bind()
 
-    println(password)
+        password
+    }
+
+    println(result)
 }
