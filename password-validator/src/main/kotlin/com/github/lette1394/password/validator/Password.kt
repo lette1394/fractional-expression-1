@@ -26,6 +26,6 @@ class Password private constructor(private val value: String) {
     }
 
     class Factory(private val passwordPolicy: PasswordPolicy) {
-        fun create(value: String): Either<Reasons, Password> = passwordPolicy.matches(value).map { Password(value) }
+        fun create(value: String): Either<FailedReasons, Password> = passwordPolicy.matches(value).map { Password(value) }
     }
 }

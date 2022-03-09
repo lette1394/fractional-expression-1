@@ -2,8 +2,8 @@ package com.github.lette1394.password.validator
 
 import arrow.core.Either.Left
 import arrow.core.Either.Right
-import com.github.lette1394.password.validator.Reasons.Companion.reasons
-import com.github.lette1394.password.validator.Reasons.Reason.PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS
+import com.github.lette1394.password.validator.FailedReasons.Companion.reasons
+import com.github.lette1394.password.validator.FailedReasons.Reason.PASSWORD_MUST_CONTAIN_AT_LEAST_2_NUMBERS
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.assertAll

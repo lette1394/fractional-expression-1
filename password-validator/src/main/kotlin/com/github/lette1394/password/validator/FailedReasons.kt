@@ -1,10 +1,10 @@
 package com.github.lette1394.password.validator
 
-import com.github.lette1394.password.validator.Reasons.Reason
+import com.github.lette1394.password.validator.FailedReasons.Reason
 
-class Reasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
+class FailedReasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
     companion object {
-        fun reasons(vararg reasons: Reason) = Reasons(reasons.toSet())
+        fun reasons(vararg reasons: Reason) = FailedReasons(reasons.toSet())
     }
 
     enum class Reason {
@@ -18,7 +18,7 @@ class Reasons(private val reasons: Set<Reason>): Set<Reason> by reasons {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as Reasons
+        other as FailedReasons
 
         if (reasons != other.reasons) return false
 
