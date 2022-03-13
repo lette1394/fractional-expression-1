@@ -17,8 +17,8 @@ class CoffeeMachine(private val drinkMaker: DrinkMaker) {
                 if (remainingCoins >= 400) {
                     val sugar = if (order.sugar > 0) "${order.sugar}" else ""
                     val stirring = if (order.sugar > 0) "0" else ""
-
-                    return "T:$sugar:$stirring"
+                    val extraHot = if (order.extraHot) "h" else ""
+                    return "T$extraHot:$sugar:$stirring"
                 }
 
                 "M:${400 - remainingCoins}원이 부족합니다"
@@ -27,8 +27,9 @@ class CoffeeMachine(private val drinkMaker: DrinkMaker) {
                 if (remainingCoins >= 500) {
                     val sugar = if (order.sugar > 0) "${order.sugar}" else ""
                     val stirring = if (order.sugar > 0) "0" else ""
+                    val extraHot = if (order.extraHot) "h" else ""
 
-                    return "H:$sugar:$stirring"
+                    return "H$extraHot:$sugar:$stirring"
                 }
 
                 "M:${500 - remainingCoins}원이 부족합니다"
@@ -37,8 +38,9 @@ class CoffeeMachine(private val drinkMaker: DrinkMaker) {
                 if (remainingCoins >= 600) {
                     val sugar = if (order.sugar > 0) "${order.sugar}" else ""
                     val stirring = if (order.sugar > 0) "0" else ""
+                    val extraHot = if (order.extraHot) "h" else ""
 
-                    return "C:$sugar:$stirring"
+                    return "C$extraHot:$sugar:$stirring"
                 }
 
                 "M:${600 - remainingCoins}원이 부족합니다"
