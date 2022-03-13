@@ -91,6 +91,11 @@ class CoffeeMachine(
     }
 
     private fun orangeJuice(): String {
+        if (beverageQuantityChecker.isEmpty("O")) {
+            emailNotifier.notifyMissingDrink("O")
+            return "M:품절입니다"
+        }
+
         if (remainingCoins >= 600) {
             orangeJuice++
             return "O::"
