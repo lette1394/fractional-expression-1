@@ -11,6 +11,10 @@ class CoffeeMachine(private val drinkMaker: DrinkMaker) {
         drinkMaker.receives(translate(order))
     }
 
+    fun report(): String {
+        return "tea: 1"
+    }
+
     private fun translate(order: Order): String {
         return when (order) {
             is Tea -> tea(order)

@@ -1,6 +1,7 @@
 package com.github.lette1394.tdd.practices.coffee.machine
 
 import io.kotest.core.spec.style.FreeSpec
+import io.kotest.matchers.shouldBe
 import io.mockk.mockk
 import io.mockk.verify
 import io.mockk.verifySequence
@@ -114,5 +115,41 @@ class CoffeeMachineTest : FreeSpec({
         verify {
             drinkMaker.receives("M:210원이 부족합니다")
         }
+    }
+
+    "report 1" {
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        val coffeeMachine = CoffeeMachine(drinkMaker)
+        coffeeMachine.insertCoin(600)
+        coffeeMachine.handle(Coffee(2, true))
+
+        coffeeMachine.insertCoin(600)
+        coffeeMachine.handle(Coffee(2, true))
+
+        coffeeMachine.insertCoin(600)
+        coffeeMachine.handle(Coffee(2, true))
+
+        coffeeMachine.report() shouldBe "tea:0, chocolate:0, coffee:3, orange juice:0, total:3, money earned: 1800"
+    }
+
+    "report 2" {
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        val coffeeMachine = CoffeeMachine(drinkMaker)
+        coffeeMachine.insertCoin(400)
+        coffeeMachine.handle(Tea(2, false))
+
+        coffeeMachine.insertCoin(500)
+        coffeeMachine.handle(Chocolate(2, true))
+
+        coffeeMachine.insertCoin(500)
+        coffeeMachine.handle(Chocolate(1, false))
+
+        coffeeMachine.insertCoin(600)
+        coffeeMachine.handle(Coffee(2, true))
+
+        coffeeMachine.insertCoin(600)
+        coffeeMachine.handle(OrangeJuice)
+
+        coffeeMachine.report() shouldBe "tea:1, chocolate:2, coffee:1, orange juice:1, total:5, money earned: 2600"
     }
 })
