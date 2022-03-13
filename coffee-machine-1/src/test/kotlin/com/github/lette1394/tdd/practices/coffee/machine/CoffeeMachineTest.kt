@@ -49,7 +49,7 @@ class CoffeeMachineTest : FreeSpec({
         }
     }
 
-    "no coin" {
+    "no coin for tee" {
         val drinkMaker = mockk<DrinkMaker>(relaxed = true)
         val coffeeMachine = CoffeeMachine(drinkMaker)
         coffeeMachine.insertCoin(390)
@@ -57,6 +57,17 @@ class CoffeeMachineTest : FreeSpec({
 
         verify {
             drinkMaker.receives("M:10원이 부족합니다")
+        }
+    }
+
+    "no coin for coffee" {
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        val coffeeMachine = CoffeeMachine(drinkMaker)
+        coffeeMachine.insertCoin(390)
+        coffeeMachine.handle(Coffee(2))
+
+        verify {
+            drinkMaker.receives("M:210원이 부족합니다")
         }
     }
 })
