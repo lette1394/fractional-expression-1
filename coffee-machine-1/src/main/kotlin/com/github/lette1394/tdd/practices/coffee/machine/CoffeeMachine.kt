@@ -4,7 +4,7 @@ class CoffeeMachine(
     private val drinkMaker: DrinkMaker,
     private val emailNotifier: EmailNotifier,
     private val beverageQuantityChecker: BeverageQuantityChecker,
-    ) {
+) {
 
     private var remainingCoins = 0L
     private var tea: Long = 0
@@ -55,6 +55,11 @@ class CoffeeMachine(
     }
 
     private fun chocolate(order: Chocolate): String {
+        if (beverageQuantityChecker.isEmpty("H")) {
+            emailNotifier.notifyMissingDrink("H")
+            return "M:품절입니다"
+        }
+
         if (remainingCoins >= 500) {
             val sugar = if (order.sugar > 0) "${order.sugar}" else ""
             val stirring = if (order.sugar > 0) "0" else ""
@@ -68,6 +73,11 @@ class CoffeeMachine(
     }
 
     private fun coffee(order: Coffee): String {
+        if (beverageQuantityChecker.isEmpty("C")) {
+            emailNotifier.notifyMissingDrink("C")
+            return "M:품절입니다"
+        }
+
         if (remainingCoins >= 600) {
             val sugar = if (order.sugar > 0) "${order.sugar}" else ""
             val stirring = if (order.sugar > 0) "0" else ""
