@@ -1,6 +1,11 @@
 package com.github.lette1394.tdd.practices.coffee.machine
 
-class CoffeeMachine(private val drinkMaker: DrinkMaker) {
+class CoffeeMachine(
+    private val drinkMaker: DrinkMaker,
+    private val emailNotifier: EmailNotifier,
+    private val beverageQuantityChecker: BeverageQuantityChecker,
+    ) {
+
     private var remainingCoins = 0L
     private var tea: Long = 0
     private var chocolate: Long = 0
@@ -32,6 +37,11 @@ class CoffeeMachine(private val drinkMaker: DrinkMaker) {
     }
 
     private fun tea(order: Tea): String {
+        if (beverageQuantityChecker.isEmpty("T")) {
+            emailNotifier.notifyMissingDrink("T")
+            return "M:품절입니다"
+        }
+
         if (remainingCoins >= 400) {
             val sugar = if (order.sugar > 0) "${order.sugar}" else ""
             val stirring = if (order.sugar > 0) "0" else ""
