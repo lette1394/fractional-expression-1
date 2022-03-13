@@ -39,6 +39,17 @@ class CoffeeMachineTest : FreeSpec({
         }
     }
 
+    "O::" {
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        val coffeeMachine = CoffeeMachine(drinkMaker)
+        coffeeMachine.insertCoin(600)
+        coffeeMachine.handle(OrangeJuice)
+
+        verify {
+            drinkMaker.receives("O::")
+        }
+    }
+
     "M:message-content" {
         val drinkMaker = mockk<DrinkMaker>(relaxed = true)
         val coffeeMachine = CoffeeMachine(drinkMaker)
