@@ -1,23 +1,44 @@
 package com.github.lette1394.tdd.practices.coffee.machine
 
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.shouldBe
+import io.mockk.mockk
+import io.mockk.verify
+import io.mockk.verifySequence
 
 class CoffeeMachineTest : FreeSpec({
-
     "T:1:0" {
-        CoffeeMachine().translate(Tea(1)) shouldBe "T:1:0"
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        CoffeeMachine(drinkMaker).handle(Tea(1))
+
+        verify {
+            drinkMaker.receives("T:1:0")
+        }
     }
 
     "H::" {
-        CoffeeMachine().translate(Chocolate(0)) shouldBe "H::"
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        CoffeeMachine(drinkMaker).handle(Chocolate(0))
+
+        verifySequence {
+            drinkMaker.receives("H::")
+        }
     }
 
     "C:2:0" {
-        CoffeeMachine().translate(Coffee(2)) shouldBe "C:2:0"
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        CoffeeMachine(drinkMaker).handle(Coffee(2))
+
+        verify {
+            drinkMaker.receives("C:2:0")
+        }
     }
 
     "M:message-content" {
-        CoffeeMachine().translate(Message("message-content")) shouldBe "M:message-content"
+        val drinkMaker = mockk<DrinkMaker>(relaxed = true)
+        CoffeeMachine(drinkMaker).handle(Message("message-content"))
+
+        verify {
+            drinkMaker.receives("M:message-content")
+        }
     }
 })
