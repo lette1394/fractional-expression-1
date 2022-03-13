@@ -14,25 +14,36 @@ class CoffeeMachine(private val drinkMaker: DrinkMaker) {
     private fun translate(order: Order): String {
         return when (order) {
             is Tea -> {
-                // 400원
-                val sugar = if (order.sugar > 0) "${order.sugar}" else ""
-                val stirring = if (order.sugar > 0) "0" else ""
+                if (remainingCoins >= 400) {
+                    val sugar = if (order.sugar > 0) "${order.sugar}" else ""
+                    val stirring = if (order.sugar > 0) "0" else ""
 
-                "T:$sugar:$stirring"
+                    return "T:$sugar:$stirring"
+                }
+
+                "M:${400 - remainingCoins}원이 부족합니다"
             }
             is Chocolate -> {
                 // 500원
-                val sugar = if (order.sugar > 0) "${order.sugar}" else ""
-                val stirring = if (order.sugar > 0) "0" else ""
+                if (remainingCoins >= 500) {
+                    val sugar = if (order.sugar > 0) "${order.sugar}" else ""
+                    val stirring = if (order.sugar > 0) "0" else ""
 
-                "H:$sugar:$stirring"
+                    return "H:$sugar:$stirring"
+                }
+
+                "M:${500 - remainingCoins}원이 부족합니다"
             }
             is Coffee -> {
                 // 600원
-                val sugar = if (order.sugar > 0) "${order.sugar}" else ""
-                val stirring = if (order.sugar > 0) "0" else ""
+                if (remainingCoins >= 600) {
+                    val sugar = if (order.sugar > 0) "${order.sugar}" else ""
+                    val stirring = if (order.sugar > 0) "0" else ""
 
-                "C:$sugar:$stirring"
+                    return "C:$sugar:$stirring"
+                }
+
+                "M:${600 - remainingCoins}원이 부족합니다"
             }
             is Message -> "M:${order.contents}"
         }
