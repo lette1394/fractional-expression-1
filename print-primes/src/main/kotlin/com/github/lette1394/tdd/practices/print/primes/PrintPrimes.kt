@@ -7,11 +7,12 @@ class PrintPrimes(
     val PRIME_NUMBERS = IntArray(count + 1)
 
     fun run() {
+        output.print(PrimeTextPage(primes(), 50, 4).asString())
+    }
+
+    private fun primes(): ArrayList<Int> {
         val ORDMAX = 30
 
-        var isJPrime: Boolean
-        var square: Int
-        var n: Int
         val mult = IntArray(ORDMAX + 1)
 
         var nextPrime = 1
@@ -22,7 +23,7 @@ class PrintPrimes(
         primes.add(2)
 
         var ord = 2
-        square = 9
+        var square = 9
 
         while (primeIndex < count) {
             do {
@@ -32,24 +33,26 @@ class PrintPrimes(
                     square = PRIME_NUMBERS[ord] * PRIME_NUMBERS[ord]
                     mult[ord - 1] = nextPrime
                 }
-                n = 2
-                isJPrime = true
-                while (n < ord && isJPrime) {
+
+                var n = 2
+                var foundNextPrime = true
+                while (n < ord && foundNextPrime) {
                     while (mult[n] < nextPrime) {
                         mult[n] = mult[n] + PRIME_NUMBERS[n] + PRIME_NUMBERS[n]
                     }
                     if (mult[n] == nextPrime) {
-                        isJPrime = false
+                        foundNextPrime = false
                     }
                     n += 1
                 }
-            } while (!isJPrime)
+            } while (!foundNextPrime)
+
             primeIndex += 1
 
             PRIME_NUMBERS[primeIndex] = nextPrime
             primes.add(nextPrime)
         }
 
-        output.print(PrimeTextPage(primes, 50, 4).asString())
+        return primes
     }
 }
