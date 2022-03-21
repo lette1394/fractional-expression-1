@@ -1,9 +1,7 @@
 package com.github.lette1394.tdd.practices.print.primes
 
-import java.io.PrintStream
-
 class PrintPrimes(
-    private val out: PrintStream,
+    private val output: Output,
 ) {
     fun run() {
         val M = 1000
@@ -51,24 +49,23 @@ class PrintPrimes(
             pageNumber = 1
             pageOffset = 1
             while (pageOffset <= M) {
-                out.println(
-                    "The First " + M +
-                            " Prime Numbers --- Page " + pageNumber
-                )
-                out.println("")
+                output.println("The First " + M +
+                        " Prime Numbers --- Page " + pageNumber)
+                output.printLineBreak()
+
                 rowOffset = pageOffset
                 while (rowOffset < pageOffset + RR) {
                     c = 0
                     while (c < CC) {
                         if (rowOffset + c * RR <= M) {
-                            out.format("%10d", PRIME_NUMBERS[rowOffset + c * RR])
+                            output.printFormatted(PRIME_NUMBERS[rowOffset + c * RR])
                         }
                         c++
                     }
-                    out.println("")
+                    output.printLineBreak()
                     rowOffset++
                 }
-                out.println("\u000c")
+                output.printPageBreak()
                 pageNumber += 1
                 pageOffset += RR * CC
             }
