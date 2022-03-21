@@ -1,6 +1,10 @@
 package com.github.lette1394.tdd.practices.print.primes
 
-object PrintPrimes {
+import java.io.PrintStream
+
+class PrintPrimes(
+    private val out: PrintStream,
+) {
     fun run() {
         val M = 1000
         val RR = 50
@@ -47,22 +51,22 @@ object PrintPrimes {
             PAGENUMBER = 1
             PAGEOFFSET = 1
             while (PAGEOFFSET <= M) {
-                println(
+                out.println(
                     "The First " + M +
                             " Prime Numbers --- Page " + PAGENUMBER
                 )
-                println("")
+                out.println("")
                 ROWOFFSET = PAGEOFFSET
                 while (ROWOFFSET < PAGEOFFSET + RR) {
                     C = 0
                     while (C < CC) {
-                        if (ROWOFFSET + C * RR <= M) System.out.format("%10d", P[ROWOFFSET + C * RR])
+                        if (ROWOFFSET + C * RR <= M) out.format("%10d", P[ROWOFFSET + C * RR])
                         C++
                     }
-                    println("")
+                    out.println("")
                     ROWOFFSET++
                 }
-                println("\u000c")
+                out.println("\u000c")
                 PAGENUMBER = PAGENUMBER + 1
                 PAGEOFFSET = PAGEOFFSET + RR * CC
             }
