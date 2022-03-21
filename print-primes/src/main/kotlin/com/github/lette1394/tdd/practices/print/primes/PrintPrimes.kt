@@ -12,63 +12,65 @@ class PrintPrimes(
         val WW = 10
         val ORDMAX = 30
         val P = IntArray(M + 1)
-        var PAGENUMBER: Int
-        var PAGEOFFSET: Int
-        var ROWOFFSET: Int
-        var C: Int
-        var J: Int
-        var K: Int
-        var JPRIME: Boolean
-        var ORD: Int
-        var SQUARE: Int
-        var N: Int
-        val MULT = IntArray(ORDMAX + 1)
-        J = 1
-        K = 1
+
+        var pageNumber: Int
+        var pageOffset: Int
+        var rowOffset: Int
+        var c: Int
+        var j: Int
+        var k: Int
+        var isJPrime: Boolean
+        var ord: Int
+        var square: Int
+        var n: Int
+        val mult = IntArray(ORDMAX + 1)
+
+        j = 1
+        k = 1
         P[1] = 2
-        ORD = 2
-        SQUARE = 9
-        while (K < M) {
+        ord = 2
+        square = 9
+        while (k < M) {
             do {
-                J = J + 2
-                if (J == SQUARE) {
-                    ORD = ORD + 1
-                    SQUARE = P[ORD] * P[ORD]
-                    MULT[ORD - 1] = J
+                j = j + 2
+                if (j == square) {
+                    ord = ord + 1
+                    square = P[ord] * P[ord]
+                    mult[ord - 1] = j
                 }
-                N = 2
-                JPRIME = true
-                while (N < ORD && JPRIME) {
-                    while (MULT[N] < J) MULT[N] = MULT[N] + P[N] + P[N]
-                    if (MULT[N] == J) JPRIME = false
-                    N = N + 1
+                n = 2
+                isJPrime = true
+                while (n < ord && isJPrime) {
+                    while (mult[n] < j) mult[n] = mult[n] + P[n] + P[n]
+                    if (mult[n] == j) isJPrime = false
+                    n = n + 1
                 }
-            } while (!JPRIME)
-            K = K + 1
-            P[K] = J
+            } while (!isJPrime)
+            k = k + 1
+            P[k] = j
         }
         run {
-            PAGENUMBER = 1
-            PAGEOFFSET = 1
-            while (PAGEOFFSET <= M) {
+            pageNumber = 1
+            pageOffset = 1
+            while (pageOffset <= M) {
                 out.println(
                     "The First " + M +
-                            " Prime Numbers --- Page " + PAGENUMBER
+                            " Prime Numbers --- Page " + pageNumber
                 )
                 out.println("")
-                ROWOFFSET = PAGEOFFSET
-                while (ROWOFFSET < PAGEOFFSET + RR) {
-                    C = 0
-                    while (C < CC) {
-                        if (ROWOFFSET + C * RR <= M) out.format("%10d", P[ROWOFFSET + C * RR])
-                        C++
+                rowOffset = pageOffset
+                while (rowOffset < pageOffset + RR) {
+                    c = 0
+                    while (c < CC) {
+                        if (rowOffset + c * RR <= M) out.format("%10d", P[rowOffset + c * RR])
+                        c++
                     }
                     out.println("")
-                    ROWOFFSET++
+                    rowOffset++
                 }
                 out.println("\u000c")
-                PAGENUMBER = PAGENUMBER + 1
-                PAGEOFFSET = PAGEOFFSET + RR * CC
+                pageNumber = pageNumber + 1
+                pageOffset = pageOffset + RR * CC
             }
         }
     }
