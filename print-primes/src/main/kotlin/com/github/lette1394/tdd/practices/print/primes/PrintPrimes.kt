@@ -30,8 +30,12 @@ class PrintPrimes(
                 n = 2
                 isJPrime = true
                 while (n < ord && isJPrime) {
-                    while (mult[n] < j) mult[n] = mult[n] + PRIME_NUMBERS[n] + PRIME_NUMBERS[n]
-                    if (mult[n] == j) isJPrime = false
+                    while (mult[n] < j) {
+                        mult[n] = mult[n] + PRIME_NUMBERS[n] + PRIME_NUMBERS[n]
+                    }
+                    if (mult[n] == j) {
+                        isJPrime = false
+                    }
                     n += 1
                 }
             } while (!isJPrime)
