@@ -3,12 +3,13 @@ package com.github.lette1394.tdd.practices.print.primes
 class PrintPrimes(
     private val output: Output,
 ) {
+    val M = 1000
+    val PRIME_NUMBERS = IntArray(M + 1)
+
     fun run() {
-        val M = 1000
         val RR = 50
         val CC = 4
         val ORDMAX = 30
-        val PRIME_NUMBERS = IntArray(M + 1)
 
         var pageNumber: Int
         var pageOffset: Int
@@ -44,31 +45,6 @@ class PrintPrimes(
             PRIME_NUMBERS[k] = j
         }
 
-
-        run {
-            pageNumber = 1
-            pageOffset = 1
-            while (pageOffset <= M) {
-                output.println("The First " + M +
-                        " Prime Numbers --- Page " + pageNumber)
-                output.printLineBreak()
-
-                rowOffset = pageOffset
-                while (rowOffset < pageOffset + RR) {
-                    c = 0
-                    while (c < CC) {
-                        if (rowOffset + c * RR <= M) {
-                            output.printFormatted(PRIME_NUMBERS[rowOffset + c * RR])
-                        }
-                        c++
-                    }
-                    output.printLineBreak()
-                    rowOffset++
-                }
-                output.printPageBreak()
-                pageNumber += 1
-                pageOffset += RR * CC
-            }
-        }
+        output.print(PrimeTextPage(this).asString())
     }
 }

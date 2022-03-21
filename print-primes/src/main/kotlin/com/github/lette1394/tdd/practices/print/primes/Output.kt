@@ -5,6 +5,8 @@ import java.io.PrintStream
 class Output(
     private val printStream: PrintStream,
 ) {
+    fun print(string: String) = printStream.print(string)
+
     fun println(string: String) = printStream.println(string)
 
     fun printLineBreak() = println("")
