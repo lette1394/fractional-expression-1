@@ -13,7 +13,7 @@ class Output(
 
     fun printPageBreak() = println("\u000c")
 
-    fun printFormatted(int: Int) {
+    fun printPrime(int: Int) {
         printStream.format("%10d", int)
     }
 }

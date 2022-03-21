@@ -14,8 +14,8 @@ class PrintPrimes(
         var n: Int
         val mult = IntArray(ORDMAX + 1)
 
-        var j = 1
-        var k = 1
+        var nextPrime = 1
+        var primeIndex = 1
         val primes = ArrayList<Int>()
 
         PRIME_NUMBERS[1] = 2
@@ -24,30 +24,30 @@ class PrintPrimes(
         var ord = 2
         square = 9
 
-        while (k < count) {
+        while (primeIndex < count) {
             do {
-                j += 2
-                if (j == square) {
+                nextPrime += 2
+                if (nextPrime == square) {
                     ord += 1
                     square = PRIME_NUMBERS[ord] * PRIME_NUMBERS[ord]
-                    mult[ord - 1] = j
+                    mult[ord - 1] = nextPrime
                 }
                 n = 2
                 isJPrime = true
                 while (n < ord && isJPrime) {
-                    while (mult[n] < j) {
+                    while (mult[n] < nextPrime) {
                         mult[n] = mult[n] + PRIME_NUMBERS[n] + PRIME_NUMBERS[n]
                     }
-                    if (mult[n] == j) {
+                    if (mult[n] == nextPrime) {
                         isJPrime = false
                     }
                     n += 1
                 }
             } while (!isJPrime)
-            k += 1
+            primeIndex += 1
 
-            PRIME_NUMBERS[k] = j
-            primes.add(j)
+            PRIME_NUMBERS[primeIndex] = nextPrime
+            primes.add(nextPrime)
         }
 
         output.print(PrimeTextPage(primes, 50, 4).asString())

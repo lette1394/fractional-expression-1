@@ -11,33 +11,63 @@ class PrimeTextPage(
 ) {
 
     fun asString(): String {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        val output = Output(PrintStream(byteArrayOutputStream))
+        return Pages().asString()
+    }
 
-        var pageNumber = 1
-        var pageOffset = 1
+    inner class Pages {
+        private val byteArrayOutputStream = ByteArrayOutputStream()
+        private val output = Output(PrintStream(byteArrayOutputStream))
 
-        while (pageOffset <= primes.size) {
+        private var pageNumber = 1
+        private var pageOffset = 1
+
+        fun asString(): String {
+            while (allRendered()) {
+                printHeader()
+                printPrimes()
+
+                next()
+            }
+
+            return printAsString()
+        }
+
+        private fun allRendered() = pageOffset <= primes.size
+
+        private fun printHeader() {
             output.println("The First ${primes.size} Prime Numbers --- Page $pageNumber")
             output.printLineBreak()
+        }
 
+        private fun printPrimes() {
             var rowOffset = pageOffset
             while (rowOffset < pageOffset + rowSize) {
-                var columnIndex = 0
-                while (columnIndex < columnSize) {
-                    if (rowOffset + columnIndex * rowSize <= primes.size) {
-                        output.printFormatted(primes[rowOffset + columnIndex * rowSize - 1])
-                    }
-                    columnIndex++
-                }
-                output.printLineBreak()
+                printRow(rowOffset)
                 rowOffset++
             }
             output.printPageBreak()
+        }
+
+        private fun printRow(rowOffset: Int) {
+            var columnIndex = 0
+            while (columnIndex < columnSize) {
+                printColumn(rowOffset, columnIndex)
+                columnIndex++
+            }
+            output.printLineBreak()
+        }
+
+        private fun printColumn(rowOffset: Int, columnIndex: Int) {
+            if (rowOffset + columnIndex * rowSize <= primes.size) {
+                output.printPrime(primes[rowOffset + columnIndex * rowSize - 1])
+            }
+        }
+
+        private fun next() {
             pageNumber += 1
             pageOffset += rowSize * columnSize
         }
 
-        return byteArrayOutputStream.toString(StandardCharsets.UTF_8)
+        private fun printAsString() = byteArrayOutputStream.toString(StandardCharsets.UTF_8)
     }
 }
