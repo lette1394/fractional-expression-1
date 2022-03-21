@@ -9,7 +9,6 @@ class PrintPrimes(
         val M = 1000
         val RR = 50
         val CC = 4
-        val WW = 10
         val ORDMAX = 30
         val P = IntArray(M + 1)
 
@@ -17,24 +16,21 @@ class PrintPrimes(
         var pageOffset: Int
         var rowOffset: Int
         var c: Int
-        var j: Int
-        var k: Int
         var isJPrime: Boolean
-        var ord: Int
         var square: Int
         var n: Int
         val mult = IntArray(ORDMAX + 1)
 
-        j = 1
-        k = 1
+        var j = 1
+        var k = 1
         P[1] = 2
-        ord = 2
+        var ord = 2
         square = 9
         while (k < M) {
             do {
-                j = j + 2
+                j += 2
                 if (j == square) {
-                    ord = ord + 1
+                    ord += 1
                     square = P[ord] * P[ord]
                     mult[ord - 1] = j
                 }
@@ -43,12 +39,14 @@ class PrintPrimes(
                 while (n < ord && isJPrime) {
                     while (mult[n] < j) mult[n] = mult[n] + P[n] + P[n]
                     if (mult[n] == j) isJPrime = false
-                    n = n + 1
+                    n += 1
                 }
             } while (!isJPrime)
-            k = k + 1
+            k += 1
             P[k] = j
         }
+
+
         run {
             pageNumber = 1
             pageOffset = 1
@@ -69,8 +67,8 @@ class PrintPrimes(
                     rowOffset++
                 }
                 out.println("\u000c")
-                pageNumber = pageNumber + 1
-                pageOffset = pageOffset + RR * CC
+                pageNumber += 1
+                pageOffset += RR * CC
             }
         }
     }
