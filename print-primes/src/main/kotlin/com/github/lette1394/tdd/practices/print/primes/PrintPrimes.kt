@@ -7,14 +7,8 @@ class PrintPrimes(
     val PRIME_NUMBERS = IntArray(M + 1)
 
     fun run() {
-        val RR = 50
-        val CC = 4
         val ORDMAX = 30
 
-        var pageNumber: Int
-        var pageOffset: Int
-        var rowOffset: Int
-        var c: Int
         var isJPrime: Boolean
         var square: Int
         var n: Int
