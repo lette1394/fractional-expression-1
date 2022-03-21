@@ -10,7 +10,7 @@ class PrintPrimesTest : FreeSpec({
     "test" {
         val out = ByteArrayOutputStream()
 
-        PrintPrimes(Output(PrintStream(out))).run()
+        PrintPrimes(1000, Output(PrintStream(out))).run()
 
         out.toString(StandardCharsets.UTF_8) shouldBe """
 The First 1000 Prime Numbers --- Page 1
