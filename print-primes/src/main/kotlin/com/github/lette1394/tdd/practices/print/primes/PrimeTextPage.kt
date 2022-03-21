@@ -19,10 +19,7 @@ class PrimeTextPage(
 
         var c = 0
         while (pageOffset <= M) {
-            output.println(
-                "The First " + M +
-                        " Prime Numbers --- Page " + pageNumber
-            )
+            output.println("The First $M Prime Numbers --- Page $pageNumber")
             output.printLineBreak()
 
             rowOffset = pageOffset
