@@ -11,4 +11,8 @@ class CompactedComparisonTest : FreeSpec({
     "ba compare bc" {
         CompactedComparison(1, "ba", "bc").toString() shouldBe "expected:<b[a]>, but was:<b[c]>"
     }
+
+    "ab compare cb" {
+        CompactedComparison(1, "ab", "cb").toString() shouldBe "expected:<[a]b>, but was:<[c]b>"
+    }
 })
