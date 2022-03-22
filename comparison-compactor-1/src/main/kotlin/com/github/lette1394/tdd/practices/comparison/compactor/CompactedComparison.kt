@@ -7,22 +7,55 @@ class CompactedComparison(
 ) {
 
     override fun toString(): String {
-        val common = common()
-        return "expected:<$common[${expected()}]>, but was:<$common[${actual()}]>"
+        val commonFront = expected.commonFront(actual)
+        val commonBack = expected.commonBack(actual)
+        return "expected:<$commonFront[${diffExpected()}]$commonBack>, but was:<$commonFront[${diffActual()}]$commonBack>"
     }
 
-    private fun expected() = expected.substringAfter(common())
+    private fun diffExpected(): String {
+        val commonFront = expected.commonFront(actual)
+        val commonBack = expected.commonBack(actual)
 
-    private fun actual() = actual.substringAfter(common())
+        var result = expected
+        if (commonFront.isNotBlank()) {
+            result = result.substringAfter(commonFront)
+        }
+        if (commonBack.isNotBlank()) {
+            result = result.substringBeforeLast(commonBack)
+        }
+        return result
+    }
 
-    private fun common(): String {
-        fun filter() = { a: Char, b: Char ->
+    private fun diffActual(): String {
+        val commonFront = expected.commonFront(actual)
+        val commonBack = expected.commonBack(actual)
+
+        var result = actual
+        if (commonFront.isNotBlank()) {
+            result = result.substringAfter(commonFront)
+        }
+        if (commonBack.isNotBlank()) {
+            result = result.substringBeforeLast(commonBack)
+        }
+        return result
+    }
+
+    private fun String.commonFront(other: String): String {
+        var done = false
+        return zip(other) { a: Char, b: Char ->
+            if (done) {
+                return@zip ""
+            }
             if (a == b) {
                 "" + a
             } else {
+                done = true
                 ""
             }
-        }
-        return expected.zip(actual, filter()).joinToString("")
+        }.joinToString("").trim()
+    }
+
+    private fun String.commonBack(other: String): String {
+        return reversed().commonFront(other.reversed()).reversed()
     }
 }
