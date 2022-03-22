@@ -5,4 +5,8 @@ class CompactedComparison(
     private val expected: String,
     private val actual: String,
 ) {
+
+    override fun toString(): String {
+        return "expected:<[$expected]>, but was:<[$actual]>"
+    }
 }
