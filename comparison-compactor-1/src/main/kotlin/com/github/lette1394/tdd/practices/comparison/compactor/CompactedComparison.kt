@@ -7,6 +7,22 @@ class CompactedComparison(
 ) {
 
     override fun toString(): String {
-        return "expected:<[$expected]>, but was:<[$actual]>"
+        val common = common()
+        return "expected:<$common[${expected()}]>, but was:<$common[${actual()}]>"
+    }
+
+    private fun expected() = expected.substringAfter(common())
+
+    private fun actual() = actual.substringAfter(common())
+
+    private fun common(): String {
+        fun filter() = { a: Char, b: Char ->
+            if (a == b) {
+                "" + a
+            } else {
+                ""
+            }
+        }
+        return expected.zip(actual, filter()).joinToString("")
     }
 }
