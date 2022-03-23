@@ -38,12 +38,13 @@ class CompactedComparison(
         }
 
         override fun toString(): String {
+            val common = common()
             if (isCompact()) {
-                val common = common()
-                val a = common.substring(common.length - contextLength, common.length)
-                return "...$a"
+                with(common) {
+                    return "...${substring(length - contextLength, length)}"
+                }
             }
-            return common()
+            return common
         }
 
         private fun isCompact() = common().isNotBlank() && (contextLength < common().length)
@@ -60,10 +61,11 @@ class CompactedComparison(
         }
 
         override fun toString(): String {
+            val common = common()
             if (isCompact()) {
-                val common = common()
-                val a = common.substring(0, contextLength)
-                return "$a..."
+                with(common) {
+                    return "${substring(0, contextLength)}..."
+                }
             }
             return common()
         }
