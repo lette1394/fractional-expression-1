@@ -7,16 +7,16 @@ class CompactedComparison(
 ) {
 
     override fun toString(): String {
-        val commonFront = expected.commonFront(actual)
-        val commonBack = expected.commonBack(actual)
-        return "expected:<$commonFront[${diffExpected()}]$commonBack>, but was:<$commonFront[${diffActual()}]$commonBack>"
+        val commonFront = commonFront()
+        val commonBack = commonBack()
+        return "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
     }
 
-    private fun diffExpected(): String {
-        val commonFront = expected.commonFront(actual)
-        val commonBack = expected.commonBack(actual)
+    private fun diff(value: String): String {
+        val commonFront = commonFront()
+        val commonBack = commonBack()
 
-        var result = expected
+        var result = value
         if (commonFront.isNotBlank()) {
             result = result.substringAfter(commonFront)
         }
@@ -26,21 +26,11 @@ class CompactedComparison(
         return result
     }
 
-    private fun diffActual(): String {
-        val commonFront = expected.commonFront(actual)
-        val commonBack = expected.commonBack(actual)
+    private fun commonFront() = expected.commonPart(actual)
 
-        var result = actual
-        if (commonFront.isNotBlank()) {
-            result = result.substringAfter(commonFront)
-        }
-        if (commonBack.isNotBlank()) {
-            result = result.substringBeforeLast(commonBack)
-        }
-        return result
-    }
+    private fun commonBack() = expected.reversed().commonPart(actual.reversed()).reversed()
 
-    private fun String.commonFront(other: String): String {
+    private fun String.commonPart(other: String): String {
         var done = false
         return zip(other) { a: Char, b: Char ->
             if (done) {
@@ -52,10 +42,6 @@ class CompactedComparison(
                 done = true
                 ""
             }
-        }.joinToString("").trim()
-    }
-
-    private fun String.commonBack(other: String): String {
-        return reversed().commonFront(other.reversed()).reversed()
+        }.joinToString("")
     }
 }
