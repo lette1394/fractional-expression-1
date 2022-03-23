@@ -14,21 +14,10 @@ class CompactedComparison(
 
     private fun sameResult() = Result(true, "the same strings: <$expected>")
 
-    private fun diffResult(): Result {
-        var commonFront = commonFront()
-        var commonBack = commonBack()
-
-        if (contextLength < commonFront.length && commonFront.isNotBlank()) {
-            commonFront = "..."
-        }
-        if (contextLength < commonBack.length && commonBack.isNotBlank()) {
-            commonBack = "..."
-        }
-        return Result(
-            false,
-            "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
-        )
-    }
+    private fun diffResult() = Result(
+        false,
+        "expected:<${Front()}[${diff(expected)}]${Back()}>, but was:<${Front()}[${diff(actual)}]${Back()}>"
+    )
 
     private fun diff(value: String): String {
         val commonFront = commonFront()
@@ -64,4 +53,26 @@ class CompactedComparison(
     }
 
     override fun toString(): String = result().description
+
+    private inner class Front {
+        override fun toString(): String {
+            if (isCompact()) {
+                return "..."
+            }
+            return commonFront()
+        }
+
+        private fun isCompact() = commonFront().isNotBlank() && (contextLength < commonFront().length)
+    }
+
+    private inner class Back {
+        override fun toString(): String {
+            if (isCompact()) {
+                return "..."
+            }
+            return commonBack()
+        }
+
+        private fun isCompact() = commonBack().isNotBlank() && (contextLength < commonBack().length)
+    }
 }
