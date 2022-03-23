@@ -5,12 +5,16 @@ class CompactedComparison(
     private val expected: String,
     private val actual: String,
 ) {
-
-    override fun toString(): String {
+    fun result(): Result {
         val commonFront = commonFront()
         val commonBack = commonBack()
-        return "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
+        return Result(
+            false,
+            "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
+        )
     }
+
+    override fun toString(): String = result().description
 
     private fun diff(value: String): String {
         val commonFront = commonFront()
