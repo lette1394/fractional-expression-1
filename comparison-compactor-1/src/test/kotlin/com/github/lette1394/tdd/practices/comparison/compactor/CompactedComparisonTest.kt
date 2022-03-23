@@ -5,7 +5,7 @@ import io.kotest.matchers.shouldBe
 
 class CompactedComparisonTest : FreeSpec({
     "ab compare ab" {
-        CompactedComparison(1, "ab", "ab").result() shouldBe Result(true, "ab")
+        CompactedComparison(1, "ab", "ab").result() shouldBe Result(true, "the same strings: <ab>")
     }
 
     "b compare c" {

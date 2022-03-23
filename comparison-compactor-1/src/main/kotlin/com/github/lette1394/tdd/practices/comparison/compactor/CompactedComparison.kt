@@ -8,6 +8,7 @@ class CompactedComparison(
     fun result(): Result {
         val commonFront = commonFront()
         val commonBack = commonBack()
+
         return Result(
             false,
             "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
