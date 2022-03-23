@@ -14,30 +14,62 @@ class CompactedComparison(
 
     private fun sameResult() = Result(true, "the same strings: <$expected>")
 
-    private fun diffResult() = Result(
-        false,
-        "expected:<${Front()}[${diff(expected)}]${Back()}>, but was:<${Front()}[${diff(actual)}]${Back()}>"
-    )
+    private fun diffResult(): Result {
+        val front = Front()
+        val back = Back()
 
-    private fun diff(value: String): String {
-        val commonFront = commonFront()
-        val commonBack = commonBack()
+        val diffExpected = front.cut(back.cut(expected))
+        val diffActual = front.cut(back.cut(actual))
 
-        var result = value
-        if (commonFront.isNotBlank()) {
-            result = result.substringAfter(commonFront)
-        }
-        if (commonBack.isNotBlank()) {
-            result = result.substringBeforeLast(commonBack)
-        }
-        return result
+        return Result(
+            false,
+            "expected:<$front[$diffExpected]$back>, but was:<$front[$diffActual]$back>"
+        )
     }
 
-    private fun commonFront() = expected.commonPart(actual)
+    override fun toString(): String = result().description
 
-    private fun commonBack() = expected.reversed().commonPart(actual.reversed()).reversed()
+    private inner class Front {
+        fun cut(value: String): String {
+            if (common().isBlank()) {
+                return value
+            }
+            return value.substringAfter(common())
+        }
 
-    private fun String.commonPart(other: String): String {
+        private fun isCompact() = common().isNotBlank() && (contextLength < common().length)
+
+        private fun common() = expected.commonUntilDiff(actual)
+
+        override fun toString(): String {
+            if (isCompact()) {
+                return "..."
+            }
+            return common()
+        }
+    }
+
+    private inner class Back {
+        fun cut(value: String): String {
+            if (common().isBlank()) {
+                return value
+            }
+            return value.substringBeforeLast(common())
+        }
+
+        private fun isCompact() = common().isNotBlank() && (contextLength < common().length)
+
+        private fun common() = expected.reversed().commonUntilDiff(actual.reversed()).reversed()
+
+        override fun toString(): String {
+            if (isCompact()) {
+                return "..."
+            }
+            return common()
+        }
+    }
+
+    private fun String.commonUntilDiff(other: String): String {
         var done = false
         return zip(other) { a: Char, b: Char ->
             if (done) {
@@ -50,29 +82,5 @@ class CompactedComparison(
                 ""
             }
         }.joinToString("")
-    }
-
-    override fun toString(): String = result().description
-
-    private inner class Front {
-        override fun toString(): String {
-            if (isCompact()) {
-                return "..."
-            }
-            return commonFront()
-        }
-
-        private fun isCompact() = commonFront().isNotBlank() && (contextLength < commonFront().length)
-    }
-
-    private inner class Back {
-        override fun toString(): String {
-            if (isCompact()) {
-                return "..."
-            }
-            return commonBack()
-        }
-
-        private fun isCompact() = commonBack().isNotBlank() && (contextLength < commonBack().length)
     }
 }
