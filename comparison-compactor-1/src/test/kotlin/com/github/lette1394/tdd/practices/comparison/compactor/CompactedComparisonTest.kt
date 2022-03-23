@@ -51,4 +51,16 @@ class CompactedComparisonTest : FreeSpec({
     "abc compare abbc (2)" {
         CompactedComparison(2, "abc", "abbc").result() shouldBe Result(false, "expected:<ab[]c>, but was:<ab[b]c>")
     }
+
+    "abcdde compare abcde (0)" {
+        CompactedComparison(0, "abcdde", "abcde").result() shouldBe Result(false, "expected:<...[d]...>, but was:<...[]...>")
+    }
+
+    "abcdde compare abcde (2)" {
+        CompactedComparison(2, "abcdde", "abcde").result() shouldBe Result(false, "expected:<...cd[d]e>, but was:<...cd[]e>")
+    }
+
+    "S&P500 compare 0" {
+        CompactedComparison(10, "S&P500", "0").result() shouldBe Result(false, "expected:<[S&P50]0>, but was:<[]0>")
+    }
 })
