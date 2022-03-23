@@ -15,9 +15,15 @@ class CompactedComparison(
     private fun sameResult() = Result(true, "the same strings: <$expected>")
 
     private fun diffResult(): Result {
-        val commonFront = commonFront()
-        val commonBack = commonBack()
+        var commonFront = commonFront()
+        var commonBack = commonBack()
 
+        if (contextLength < commonFront.length && commonFront.isNotBlank()) {
+            commonFront = "..."
+        }
+        if (contextLength < commonBack.length && commonBack.isNotBlank()) {
+            commonBack = "..."
+        }
         return Result(
             false,
             "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
