@@ -6,6 +6,15 @@ class CompactedComparison(
     private val actual: String,
 ) {
     fun result(): Result {
+        if (expected == actual) {
+            return sameResult()
+        }
+        return diffResult()
+    }
+
+    private fun sameResult() = Result(true, "the same strings: <$expected>")
+
+    private fun diffResult(): Result {
         val commonFront = commonFront()
         val commonBack = commonBack()
 
@@ -14,8 +23,6 @@ class CompactedComparison(
             "expected:<$commonFront[${diff(expected)}]$commonBack>, but was:<$commonFront[${diff(actual)}]$commonBack>"
         )
     }
-
-    override fun toString(): String = result().description
 
     private fun diff(value: String): String {
         val commonFront = commonFront()
@@ -49,4 +56,6 @@ class CompactedComparison(
             }
         }.joinToString("")
     }
+
+    override fun toString(): String = result().description
 }
